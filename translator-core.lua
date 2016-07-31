@@ -88,6 +88,10 @@ function GSTranslateString(instring, fromLocale, toLocale)
             local foundspell, returnval = GSTRTranslateSpell(w, fromLocale, toLocale)
             output = output ..  returnval .. ", "
           end
+          local resetleft = string.find(output, ", , ")
+          if not GSTRisempty(resetleft) then
+            output = string.sub(output, 1, resetleft -1)
+          end
           output = output .. "\n"
         else
           -- pass it through
@@ -142,6 +146,7 @@ end
 
 function GSTRGetConditionalsFromString(str)
   GSPrintDebugMessage("Entering GSTRGetConditionalsFromString with : " .. str, GNOME)
+  --check for conditionals
   local found = false
   local mods = ""
   local leftstr
@@ -167,6 +172,34 @@ function GSTRGetConditionalsFromString(str)
      str = string.sub(str, rightstr + 1)
      GSPrintDebugMessage("str changed to: " .. str, GNOME)
   end
+
+  -- Check for resets
+  GSPrintDebugMessage("checking for reset= in " .. str, GNOME)
+  local resetleft = string.find(str, "reset=")
+  if not GSTRisempty(resetleft) then
+    GSPrintDebugMessage("found reset= at" .. resetleft, GNOME)
+  end
+
+  local rightfound = false
+  local resetright = 0
+  if resetleft then
+    for i = 1, #str do
+      local c = str:sub(i,i)
+      if c == " " then
+        if not rightfound then
+          resetright = i
+          rightfound = true
+        end
+      end
+    end
+    mods = mods .. " " .. string.sub(str, resetleft, resetright)
+    GSPrintDebugMessage("reset= mods changed to: " .. mods, GNOME)
+    str = string.sub(str, resetright + 1)
+    GSPrintDebugMessage("reset= test str changed to: " .. str, GNOME)
+    found = true
+  end
+
+
   return found, mods, str
 end
 
