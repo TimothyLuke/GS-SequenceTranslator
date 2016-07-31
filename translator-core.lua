@@ -86,7 +86,7 @@ function GSTranslateString(instring, fromLocale, toLocale)
               w = string.sub(w, 2)
             end
             local foundspell, returnval = GSTRTranslateSpell(w, fromLocale, toLocale)
-            output = output ..  returnval
+            output = output ..  returnval .. ", "
           end
           output = output .. "\n"
         else
