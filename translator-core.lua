@@ -80,6 +80,7 @@ function GSTranslateString(instring, fromLocale, toLocale)
           end
         -- check for cast Sequences
         elseif strlower(cmd) == "castsequence" then
+          GSPrintDebugMessage("attempting to split : " .. etc, GNOME)
           for _, w in ipairs(GSTRsplit(etc,",")) do
             w = string.match(w, "^%s*(.-)%s*$")
             if string.sub(w, 1, 1) == "!" then
@@ -108,7 +109,10 @@ function GSTRTranslateSpell(str, fromLocale, toLocale)
   local output = ""
   local found = false
   -- check for cases like /cast [talent:7/1] Bladestorm;[talent:7/3] Dragon Roar
+  str = string.match(str, "^%s*(.-)%s*$")
+  GSPrintDebugMessage("GSTRTranslateSpell Attempting to translate " .. str, GNOME)
   if string.match(str, ";") then
+    GSPrintDebugMessage("GSTRTranslateSpell found ; in " .. str .. " about to do recursive call.", GNOME)
     for _, w in ipairs(GSTRsplit(str,";")) do
       found, returnval = GSTRTranslateSpell(string.match(w, "^%s*(.-)%s*$"), fromLocale, toLocale)
       output = output .. returnval .. ";"
@@ -117,16 +121,28 @@ function GSTRTranslateSpell(str, fromLocale, toLocale)
     local conditionals, mods, etc = GSTRGetConditionalsFromString(str)
     if conditionals then
       output = output .. mods .. " "
+      GSPrintDebugMessage("GSTRTranslateSpell conditionals found ", GNOME)
     end
     GSPrintDebugMessage("output: " .. output .. " mods: " .. mods .. " etc: " .. etc, GNOME)
-    local foundspell = language[GSTRStaticHash][fromLocale][string.match(etc, "^%s*(.-)%s*$")]
+    etc = string.match(etc, "^%s*(.-)%s*$")
+    etc = string.gsub (etc, "!", "")
+    local foundspell = language[GSTRStaticHash][fromLocale][etc]
     if foundspell then
       GSPrintDebugMessage("Translating Spell ID : " .. foundspell .. " to " .. language[GSTRStaticKey][toLocale][foundspell], GNOME)
       output = output  .. language[GSTRStaticKey][toLocale][foundspell]
       found = true
     else
-      GSPrintDebugMessage("Did not find : " .. etc .. " in " .. fromLocale, GNOME)
-      output = output  .. etc
+      GSPrintDebugMessage("Did not find : " .. etc .. " in " .. fromLocale .. " Hash table checking shadow table", GNOME)
+      -- try the shadow table
+      local foundspell = language[GSTRStaticShadow][fromLocale][string.lower(etc)]
+      if foundspell then
+        GSPrintDebugMessage("Translating from the shadow table for  Spell ID : " .. foundspell .. " to " .. language[GSTRStaticKey][toLocale][foundspell], GNOME)
+        output = output  .. language[GSTRStaticKey][toLocale][foundspell]
+        found = true
+      else
+        GSPrintDebugMessage("Did not find : " .. etc .. " in " .. fromLocale, GNOME)
+        output = output  .. etc
+      end
     end
   end
   return found, output
@@ -172,7 +188,7 @@ function GSTRGetConditionalsFromString(str)
      str = string.sub(str, rightstr + 1)
      GSPrintDebugMessage("str changed to: " .. str, GNOME)
   end
-
+  str = string.match(str, "^%s*(.-)%s*$")
   -- Check for resets
   GSPrintDebugMessage("checking for reset= in " .. str, GNOME)
   local resetleft = string.find(str, "reset=")
@@ -203,17 +219,17 @@ function GSTRGetConditionalsFromString(str)
   return found, mods, str
 end
 
-function GSTranslateGetLocaleSpellNameTable()
-  local spelltable = {}
-  local hashtable = {}
-  for k,v in pairs(language[GSTRStaticKey]["enUS"]) do
-      --print(k)
-      local spellname = GetSpellInfo(k)
-      spelltable[k] = spellname
-      hashtable[spellname] = k
-  end
-  return spelltable, hashtable
-end
+--function GSTranslateGetLocaleSpellNameTable()
+--  local spelltable = {}
+--  local hashtable = {}
+--  for k,v in pairs(language[GSTRStaticKey]["enUS"]) do
+--      --print(k)
+--      local spellname = GetSpellInfo(k)
+--      spelltable[k] = spellname
+--      hashtable[spellname] = k
+--  end
+--  return spelltable, hashtable
+--end
 
 function GSTRlines(tab, str)
   local function helper(line) table.insert(tab, line) return "" end
@@ -221,13 +237,13 @@ function GSTRlines(tab, str)
 end
 
 
-if GSTRisempty(GSTRListCachedLanguages()[locale]) then
-  -- Load the current locale into the language SetAttribute
-  if GSCore then
-    GSPrintDebugMessage("Loading Spells for language " .. locale, GNOME)
-  end
-  language[GSTRStaticKey][locale], language[GSTRStaticHash][locale] = GSTranslateGetLocaleSpellNameTable()
-end
+-- if GSTRisempty(GSTRListCachedLanguages()[locale]) then
+--   -- Load the current locale into the language SetAttribute
+--   if GSCore then
+--     GSPrintDebugMessage("Loading Spells for language " .. locale, GNOME)
+--   end
+--   language[GSTRStaticKey][locale], language[GSTRStaticHash][locale] = GSTranslateGetLocaleSpellNameTable()
+-- end
 
 function GSTRsplit(source, delimiters)
   local elements = {}
