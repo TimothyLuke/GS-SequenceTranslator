@@ -261,4 +261,9 @@ function GSTRReportUnfoundSpells()
   for name,sequence in pairs(GSMasterSequences) do
     GSTranslateSequenceFromTo(sequence, "enUS", "esMX")
   end
+  GSTRUnfoundSpellIds = {}
+
+  for _, spell in GSTRUnfoundSpells do
+    GSTRUnfoundSpellIds[spell] = GetSpellInfo(spell)
+  end
 end
