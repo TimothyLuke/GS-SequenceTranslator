@@ -238,14 +238,6 @@ function GSTRlines(tab, str)
 end
 
 
--- if GSTRisempty(GSTRListCachedLanguages()[locale]) then
---   -- Load the current locale into the language SetAttribute
---   if GSCore then
---     GSPrintDebugMessage("Loading Spells for language " .. locale, GNOME)
---   end
---   language[GSTRStaticKey][locale], language[GSTRStaticHash][locale] = GSTranslateGetLocaleSpellNameTable()
--- end
-
 function GSTRsplit(source, delimiters)
   local elements = {}
   local pattern = '([^'..delimiters..']+)'
