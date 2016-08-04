@@ -142,6 +142,7 @@ function GSTRTranslateSpell(str, fromLocale, toLocale)
       else
         GSPrintDebugMessage("Did not find : " .. etc .. " in " .. fromLocale, GNOME)
         output = output  .. etc
+        GSTRUnfoundSpells [#GSTRUnfoundSpells + 1] = etc
       end
     end
   end
@@ -250,4 +251,14 @@ function GSTRsplit(source, delimiters)
   local pattern = '([^'..delimiters..']+)'
   string.gsub(source, pattern, function(value) elements[#elements + 1] =     value;  end);
   return elements
+end
+
+
+function GSTRReportUnfoundSpells()
+  GSTRUnfoundSpells = nil
+  GSTRUnfoundSpells = {}
+
+  for name,sequence in pairs(GSMasterSequences) do
+    GSTranslateSequenceFromTo(sequence, "enUS", "esMX")
+  end
 end
