@@ -81,6 +81,11 @@ function GSTranslateString(instring, fromLocale, toLocale)
         -- check for cast Sequences
         elseif strlower(cmd) == "castsequence" then
           GSPrintDebugMessage("attempting to split : " .. etc, GNOME)
+          --look for conditionals at the startattack
+          local conditionals, mods, etc = GSTRGetConditionalsFromString(etc)
+          if conditionals then
+            output = output .. mods .. " "
+          end
           for _, w in ipairs(GSTRsplit(etc,",")) do
             w = string.match(w, "^%s*(.-)%s*$")
             if string.sub(w, 1, 1) == "!" then
@@ -128,7 +133,8 @@ function GSTRTranslateSpell(str, fromLocale, toLocale)
     etc = string.gsub (etc, "!", "")
     local foundspell = language[GSTRStaticHash][fromLocale][etc]
     if foundspell then
-      GSPrintDebugMessage("Translating Spell ID : " .. foundspell .. " to " .. language[GSTRStaticKey][toLocale][foundspell], GNOME)
+      GSPrintDebugMessage("Translating Spell ID : " .. foundspell , GNOME )
+      GSPrintDebugMessage(" to " .. (GSTRisempty(language[GSTRStaticKey][toLocale][foundspell]) and " but its not in [GSTRStaticKey][" .. toLocale .. "]" or language[GSTRStaticKey][toLocale][foundspell]) , GNOME)
       output = output  .. language[GSTRStaticKey][toLocale][foundspell]
       found = true
     else
@@ -255,7 +261,7 @@ function GSTRReportUnfoundSpells()
   end
   GSTRUnfoundSpellIds = {}
 
-  for _, spell in GSTRUnfoundSpells do
+  for _,spell in pairs(GSTRUnfoundSpellspairs) do
     GSTRUnfoundSpellIds[spell] = GetSpellInfo(spell)
   end
 end
