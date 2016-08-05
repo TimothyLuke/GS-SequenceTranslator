@@ -12,6 +12,7 @@ startup.lua
 langs\enUS.lua
 langs\enUSHash.lua
 langs\enUSSHADOW.lua
+langs\enUSErrata.lua
 langs\enGB.lua
 langs\enGBHash.lua
 langs\enGBSHADOW.lua

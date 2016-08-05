@@ -116,6 +116,9 @@ function GSTRTranslateSpell(str, fromLocale, toLocale)
   -- check for cases like /cast [talent:7/1] Bladestorm;[talent:7/3] Dragon Roar
   str = string.match(str, "^%s*(.-)%s*$")
   GSPrintDebugMessage("GSTRTranslateSpell Attempting to translate " .. str, GNOME)
+  if string.sub(str, strlen(str)) == "," then
+    str = string.sub(str, 1, strlen(str)-1)
+  end
   if string.match(str, ";") then
     GSPrintDebugMessage("GSTRTranslateSpell found ; in " .. str .. " about to do recursive call.", GNOME)
     for _, w in ipairs(GSTRsplit(str,";")) do
