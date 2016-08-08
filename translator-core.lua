@@ -2,7 +2,7 @@ local GNOME, language = ...
 local locale = GetLocale();
 
 
-function GSTRisempty(s)
+function GSisEmpty(s)
   return s == nil or s == ''
 end
 
@@ -19,12 +19,12 @@ end
 
 function GSTranslateSequence(sequence)
 
-  if not GSTRisempty(sequence) then
-    if (GSTRisempty(sequence.lang) and "enUS" or sequence.lang) ~= locale then
-      --GSPrintDebugMessage((GSTRisempty(sequence.lang) and "enUS" or sequence.lang) .. " ~=" .. locale, GNOME)
-      return GSTranslateSequenceFromTo(sequence, (GSTRisempty(sequence.lang) and "enUS" or sequence.lang), locale)
+  if not GSisEmpty(sequence) then
+    if (GSisEmpty(sequence.lang) and "enUS" or sequence.lang) ~= locale then
+      --GSPrintDebugMessage((GSisEmpty(sequence.lang) and "enUS" or sequence.lang) .. " ~=" .. locale, GNOME)
+      return GSTranslateSequenceFromTo(sequence, (GSisEmpty(sequence.lang) and "enUS" or sequence.lang), locale)
     else
-      GSPrintDebugMessage((GSTRisempty(sequence.lang) and "enUS" or sequence.lang) .. " ==" .. locale, GNOME)
+      GSPrintDebugMessage((GSisEmpty(sequence.lang) and "enUS" or sequence.lang) .. " ==" .. locale, GNOME)
       return sequence
     end
   end
@@ -36,11 +36,11 @@ function GSTranslateSequenceFromTo(sequence, fromLocale, toLocale)
   GSPrintDebugMessage("lines: " .. lines, GNOME)
 
   lines = GSTranslateString(lines, fromLocale, toLocale)
-  if not GSTRisempty(sequence.PostMacro) then
+  if not GSisEmpty(sequence.PostMacro) then
     -- Translate PostMacro
     sequence.PostMacro = GSTranslateString(sequence.PostMacro, fromLocale, toLocale)
   end
-  if not GSTRisempty(sequence.PreMacro) then
+  if not GSisEmpty(sequence.PreMacro) then
     -- Translate PostMacro
     sequence.PreMacro = GSTranslateString(sequence.PreMacro, fromLocale, toLocale)
   end
@@ -62,7 +62,7 @@ function GSTranslateString(instring, fromLocale, toLocale)
   local output = ""
   local stringlines = GSTRSplitMeIntolines(instring)
   for _,v in ipairs(stringlines) do
-    if not GSTRisempty(v) then
+    if not GSisEmpty(v) then
       for cmd, etc in gmatch(v or '', '/(%w+)%s+([^\n]+)') do
         GSPrintDebugMessage("cmd : \n" .. cmd .. " etc: " .. etc, GNOME)
         output = output .. "/" .. cmd .. " "
@@ -95,7 +95,7 @@ function GSTranslateString(instring, fromLocale, toLocale)
             output = output ..  returnval .. ", "
           end
           local resetleft = string.find(output, ", , ")
-          if not GSTRisempty(resetleft) then
+          if not GSisEmpty(resetleft) then
             output = string.sub(output, 1, resetleft -1)
           end
           output = output .. "\n"
@@ -137,7 +137,7 @@ function GSTRTranslateSpell(str, fromLocale, toLocale)
     local foundspell = language[GSTRStaticHash][fromLocale][etc]
     if foundspell then
       GSPrintDebugMessage("Translating Spell ID : " .. foundspell , GNOME )
-      GSPrintDebugMessage(" to " .. (GSTRisempty(language[GSTRStaticKey][toLocale][foundspell]) and " but its not in [GSTRStaticKey][" .. toLocale .. "]" or language[GSTRStaticKey][toLocale][foundspell]) , GNOME)
+      GSPrintDebugMessage(" to " .. (GSisEmpty(language[GSTRStaticKey][toLocale][foundspell]) and " but its not in [GSTRStaticKey][" .. toLocale .. "]" or language[GSTRStaticKey][toLocale][foundspell]) , GNOME)
       output = output  .. language[GSTRStaticKey][toLocale][foundspell]
       found = true
     else
@@ -202,7 +202,7 @@ function GSTRGetConditionalsFromString(str)
   -- Check for resets
   GSPrintDebugMessage("checking for reset= in " .. str, GNOME)
   local resetleft = string.find(str, "reset=")
-  if not GSTRisempty(resetleft) then
+  if not GSisEmpty(resetleft) then
     GSPrintDebugMessage("found reset= at" .. resetleft, GNOME)
   end
 
