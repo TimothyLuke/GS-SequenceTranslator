@@ -1,6 +1,7 @@
-local GNOME, language = ...
+local GNOME, _ = ...
 local locale = GetLocale();
 
+local language = GSAvailableLanguages
 
 function GSisEmpty(s)
   return s == nil or s == ''

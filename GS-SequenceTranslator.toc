@@ -52,6 +52,7 @@ langs\zhTWSHADOW.lua
 langs\zhCN.lua
 langs\zhCNHash.lua
 langs\zhCNSHADOW.lua
+poststartup.lua
 
 # Translater
 translator-core.lua
