@@ -1,6 +1,7 @@
-local GNOME, language = ...
+local GNOME, _ = ...
 local locale = GetLocale();
 
+<<<<<<< HEAD
 local escapes = {
     ["|c%x%x%x%x%x%x%x%x"] = "", -- color start
     ["|r"] = "", -- color end
@@ -13,6 +14,12 @@ local function unescape(str)
         str = gsub(str, k, v)
     end
     return str
+=======
+local language = GSAvailableLanguages
+
+function GSisEmpty(s)
+  return s == nil or s == ''
+>>>>>>> 2ce3eaae86fe2781b0c0c829ab19277523fb3282
 end
 
 
