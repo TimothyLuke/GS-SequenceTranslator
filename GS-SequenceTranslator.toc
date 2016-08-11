@@ -1,5 +1,5 @@
 ## Interface: 70000
-## Title: |cffff0000GS-E:|r Sequence Translator
+## Title: |cffff0000GS-E:|r |cFF00D1FFSequence Translator|r
 ## Notes: This addon allows you to Trnaslate GnomeSequenced-Enhanced Sequences into your local client language
 ## Author: Draik
 ## Version: v1.1.6 - Legion
@@ -9,9 +9,6 @@
 startup.lua
 
 # Language Files
-langs\enUS.lua
-langs\enUSHash.lua
-langs\enUSSHADOW.lua
 langs\enUSErrata.lua
 langs\enGB.lua
 langs\enGBHash.lua
@@ -55,4 +52,4 @@ langs\zhCNSHADOW.lua
 poststartup.lua
 
 # Translater
-translator-core.lua
+poststartup.lua
