@@ -1,6 +1,6 @@
 local GNOME, language = ...
 
-language[GSTRStaticHash]["zhCN"] = {
+GSAvailableLanguages[GSTRStaticHash]["zhCN"] = {
 	["传送门：暴风之盾PvP商人"] = 193807,
 	["寒冰风暴"] = 131559,
 	["震地图腾"] = 61882,
@@ -1802,4 +1802,4 @@ language[GSTRStaticHash]["zhCN"] = {
 	["潮汐奔涌"] = 68249,
 }
 
-language[GSTRStaticHash]["enCN"] = language[GSTRStaticHash]["zhCN"]
+GSAvailableLanguages[GSTRStaticHash]["enCN"] = GSAvailableLanguages[GSTRStaticHash]["zhCN"]

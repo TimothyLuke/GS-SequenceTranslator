@@ -1,6 +1,6 @@
 local GNOME, language = ...
 
-language[GSTRStaticKey]["zhCN"] = {
+GSAvailableLanguages[GSTRStaticKey]["zhCN"] = {
 	[220340] = "海浪冲击",
 	[1535] = "火焰新星",
 	[49360] = "传送门：塞拉摩",
@@ -1856,4 +1856,4 @@ language[GSTRStaticKey]["zhCN"] = {
 	[217020] = "狂热",
 }
 
-language[GSTRStaticKey]["enCN"] = language[GSTRStaticKey]["zhCN"]
+GSAvailableLanguages[GSTRStaticKey]["enCN"] = GSAvailableLanguages[GSTRStaticKey]["zhCN"]

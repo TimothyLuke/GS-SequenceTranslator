@@ -1,12 +1,25 @@
 local GNOME, language = ...
 
 local function TableConcat(t1,t2)
-    for k,v in ipairs(t2) do
-        for j, x in ipairs(v) do
-          t1[k][j] = x
+    local returntab = t1
+    for k,v in pairs(t2) do
+      --print ("k " .. k)
+      --print ("v " .. v)
+
+        for j, x in pairs(v) do
+          --print ("j " .. j)
+          --print ("x " .. x)
+          returntab[k][j] = x
         end
     end
-    return t1
+    return returntab
 end
 
-GSAvailableLanguages = TableConcat(GSAvailableLanguages, language)
+--TempLanguage = language
+
+--GSAvailableLanguages = TableConcat(GSAvailableLanguages, language)
+GSAdditionalLanguagesAvailable = true
+
+if GSCore then
+  GSPrintDebugMessage("Translator Initialised and Global GSTranslatorAvailable marked as True", GNOME)
+end
