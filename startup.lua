@@ -1,4 +1,1 @@
 local GNOME, language = ...
-
-
-GSTRUnfoundSpells = {}
