@@ -25,7 +25,7 @@ install:
   - luarocks install luacov-coveralls
 
 script:
-  - luacheck --std max+busted --no-unused langs/*.lua --globals GSDebugOutput GSTRStaticHash GSTRStaticKey GSTRStaticShadow GSMasterOptions
+  - luacheck --std max+busted --no-unused langs/*.lua --globals GSDebugOutput GSTRStaticHash GSTRStaticKey GSTRStaticShadow GSMasterOptions GSAvailableLanguages
 
 
 after_success:
