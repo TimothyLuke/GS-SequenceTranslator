@@ -6,4 +6,5 @@ GSAvailableLanguages[GSTRStaticHash]["enUS"] = {
 	["Lightning Bold"] = 8246,
 	["Eathern Shield Totem"] = 198838,
 	["Savage Defense"] = 132402, -- FOr some reason this comes out as ZZOld
+	["Cat Form(Shapeshift)"] = 3025,
 }
