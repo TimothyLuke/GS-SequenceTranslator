@@ -1,4 +1,5 @@
-local GNOME, language = ...
+local GSE = GSE
+local Statics = GSE.Static
 
 -- These are commonly mispelt spells
 GSE.TranslatorLanguageTables[Statics.TranslationHash]["enUS"] = {

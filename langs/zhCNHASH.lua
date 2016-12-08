@@ -1,4 +1,5 @@
-local GNOME, language = ...
+local GSE = GSE
+local Statics = GSE.Static
 
 GSE.TranslatorLanguageTables[Statics.TranslationHash]["zhCN"] = {
 	["传送门：暴风之盾PvP商人"] = 193807,

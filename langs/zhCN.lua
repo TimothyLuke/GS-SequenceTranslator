@@ -1,4 +1,5 @@
-local GNOME, language = ...
+local GSE = GSE
+local Statics = GSE.Static
 
 GSE.TranslatorLanguageTables[Statics.TranslationKey]["zhCN"] = {
 	[220340] = "海浪冲击",
