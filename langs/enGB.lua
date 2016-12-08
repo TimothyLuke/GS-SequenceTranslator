@@ -1,6 +1,7 @@
-local GNOME, _ = ...
+local GSE = GSE
+local Statics = GSE.Static
 
-GSAvailableLanguages[GSTRStaticKey]["enGB"] = {
+GSE.TranslatorLanguageTables[Statics.TranslationKey]["enGB"] = {
 	[17] = "Power Word: Shield",
 	[53] = "Backstab",
 	[66] = "Invisibility",

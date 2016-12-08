@@ -1,7 +1,7 @@
 local GNOME, language = ...
 
 -- These are commonly mispelt spells
-GSAvailableLanguages[GSTRStaticHash]["enUS"] = {
+GSE.TranslatorLanguageTables[Statics.TranslationHash]["enUS"] = {
 	["Ice Flows"] = 108839,
 	["Lightning Bold"] = 8246,
 	["Eathern Shield Totem"] = 198838,

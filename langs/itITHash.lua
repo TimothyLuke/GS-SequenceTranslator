@@ -1,6 +1,7 @@
-local GNOME, _ = ...
+local GSE = GSE
+local Statics = GSE.Static
 
-GSAvailableLanguages[GSTRStaticHash]["itIT"] = {
+GSE.TranslatorLanguageTables[Statics.TranslationHash]["itIT"] = {
 	["Parola del Potere: Scudo"] = 17,
 	["Pugnalata alle Spalle"] = 53,
 	["Invisibilità"] = 66,

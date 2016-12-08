@@ -1,6 +1,7 @@
-local GNOME, _ = ...
+local GSE = GSE
+local Statics = GSE.Static
 
-GSAvailableLanguages[GSTRStaticHash]["frFR"] = {
+GSE.TranslatorLanguageTables[Statics.TranslationHash]["frFR"] = {
 	["Mot de pouvoir : Bouclier"] = 17,
 	["Attaque sournoise"] = 53,
 	["Invisibilité"] = 66,

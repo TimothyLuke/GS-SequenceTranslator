@@ -1,4 +1,5 @@
-local GNOME, language = ...
+local GSE = GSE
+local Statics = GSE.Static
 
 local function TableConcat(t1,t2)
     local returntab = t1
@@ -18,8 +19,4 @@ end
 --TempLanguage = language
 
 --GSAvailableLanguages = TableConcat(GSAvailableLanguages, language)
-GSAdditionalLanguagesAvailable = true
-
-if GSCore then
-  GSPrintDebugMessage("Translator Initialised and Global GSTranslatorAvailable marked as True", GNOME)
-end
+GSE.AdditionalLanguagesAvailable = true

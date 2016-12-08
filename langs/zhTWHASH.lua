@@ -1,6 +1,7 @@
-local GNOME, _ = ...
+local GSE = GSE
+local Statics = GSE.Static
 
-GSAvailableLanguages[GSTRStaticHash]["zhTW"] = {
+GSE.TranslatorLanguageTables[Statics.TranslationHash]["zhTW"] = {
 	["真言術：盾"] = 17,
 	["背刺"] = 53,
 	["隱形術"] = 66,

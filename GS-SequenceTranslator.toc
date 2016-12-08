@@ -1,12 +1,9 @@
 ## Interface: 70100
-## Title: |cffff0000GS-E:|r |cFF00D1FFSequence Translator|r
-## Notes: This addon allows you to Trnaslate GnomeSequenced-Enhanced Sequences into your local client language
-## Author: Draik
-## Version: 1.4.0
-## RequiredDeps: GS-Core
-
-#setup
-startup.lua
+## Title: |cffff0000GSE:|r |cFF00D1FFAdditional Language Packs|r
+## Notes: This adds extra translation languages to GSE.
+## Author: TimothyLuke
+## Version: 2.0
+## RequiredDeps: GSE
 
 # Language Files
 langs\enUSErrata.lua

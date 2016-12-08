@@ -1,6 +1,7 @@
-﻿local GNOME, _ = ...
+﻿local GSE = GSE
+local Statics = GSE.Static
 
-GSAvailableLanguages[GSTRStaticHash]["ruRU"] = {
+GSE.TranslatorLanguageTables[Statics.TranslationHash]["ruRU"] = {
 	["Слово силы: Щит"] = 17,
 	["Удар в спину"] = 53,
 	["Невидимость"] = 66,
